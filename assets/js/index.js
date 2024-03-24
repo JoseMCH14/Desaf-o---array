@@ -147,7 +147,7 @@ const propiedades_venta = [
   },
 ];
 
-let alq = function (ventana) {
+let template_alquiler = function (ventana) {
   for (let alquiler of propiedades_alquiler) {
     let mascotaC = "";
     let mascotaT = "";
@@ -217,7 +217,7 @@ let alq = function (ventana) {
   }
 };
 
-let vent = function (ventana) {
+let template_venta = function (ventana) {
   for (let venta of propiedades_venta) {
     let mascotaC = "";
     let mascotaT = "";
@@ -288,11 +288,11 @@ let vent = function (ventana) {
 
 if (pathname === "/index.html") {
   windows = true;
-  vent(windows);
+  template_venta(windows);
   windows = true;
-  alq(windows);
+  template_alquiler(windows);
 } else if (pathname === "/propiedades_alquiler.html") {
-  alq(windows);
+  template_alquiler(windows);
 } else if (pathname === "/propiedades_venta.html") {
-  vent(windows);
+  template_venta(windows);
 }
