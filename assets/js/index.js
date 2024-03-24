@@ -6,6 +6,7 @@ const Alq_index = document.querySelector("#propiedades_alquiler");
 const Ven_index = document.querySelector("#propiedades_venta");
 let n = 0;
 let windows = false;
+let html = ""
 
 const pathname = window.location.pathname;
 
@@ -147,7 +148,7 @@ const propiedades_venta = [
   },
 ];
 /* Funcion para hacer card de inmuebles en alquiler */
-let template_alquiler = function (ventana) {
+let template_alquiler = function (ventana,valor) {
   for (let alquiler of propiedades_alquiler) {
     let mascotaC = ""; /* color para condiciones de mascota */
     let mascotaT = ""; /* texto para condiciones de mascota */
@@ -179,45 +180,29 @@ let template_alquiler = function (ventana) {
     n += 1;
     console.log(n);
     console.log(windows);
-    if (windows === true) {
-      /* Hacer cards de inmuebles en index.html */
-      Alq_index.innerHTML += `
-      <div class="card">
-                  <img src="${alquiler.src}" alt=propieda">
-                  <div class="cardtext">
-                      <h3 class="nombre">${alquiler.nombre}</h3>
-                      <h4 class="descripcion">${alquiler.descripcion}</h4>
-                      <p class="direccion"><i class="fas fa-map-marker-alt"></i>${alquiler.ubicacion}</p>  
-                      <p class="Habitaciones"><i class="fas fa-bed"></i>${alquiler.habitaciones} Habitaciones | <i class="fas fa-bath"></i>${alquiler.baño} Baños</p>
-                      <p><i class="fas fa-dollar-sign"></i>${alquiler.costo}</p>
-                      <p style="color:${fumarC}"><i class="${fumarI}"></i>${fumarT}</p>
-                      <p style="color:${mascotaC}"><i class="${mascotaI}"></i>${mascotaT}</p>
-                  </div>
-              </div>
-      `;
+    html += `
+    <div class="card">
+                <img src="${alquiler.src}" alt=propieda">
+                <div class="cardtext">
+                    <h3 class="nombre">${alquiler.nombre}</h3>
+                    <h4 class="descripcion">${alquiler.descripcion}</h4>
+                    <p class="direccion"><i class="fas fa-map-marker-alt"></i>${alquiler.ubicacion}</p>  
+                    <p class="Habitaciones"><i class="fas fa-bed"></i>${alquiler.habitaciones} Habitaciones | <i class="fas fa-bath"></i>${alquiler.baño} Baños</p>
+                    <p><i class="fas fa-dollar-sign"></i>${alquiler.costo}</p>
+                    <p style="color:${fumarC}"><i class="${fumarI}"></i>${fumarT}</p>
+                    <p style="color:${mascotaC}"><i class="${mascotaI}"></i>${mascotaT}</p>
+                </div>
+            </div>
+    `;
+    if (windows === true) {  
       if (n === 3) {
         /* Solo permite crear 3 cards */
         n = 0;
         break;
       }
-    } else {
-      /* Hacer cards de inmuebles en propiedades_alquiler.html */
-      Alq_completo.innerHTML += `
-        <div class="card">
-            <img src="${alquiler.src}" alt=propieda">
-            <div class="cardtext">
-                <h3 class="nombre">${alquiler.nombre}</h3>
-                <h4 class="descripcion">${alquiler.descripcion}</h4>
-                <p class="direccion"><i class="fas fa-map-marker-alt"></i>${alquiler.ubicacion}</p>  
-                <p class="Habitaciones"><i class="fas fa-bed"></i>${alquiler.habitaciones} Habitaciones | <i class="fas fa-bath"></i>${alquiler.baño} Baños</p>
-                <p><i class="fas fa-dollar-sign"></i>${alquiler.costo}</p>
-                <p style="color:${fumarC}"><i class="${fumarI}"></i>${fumarT}</p>
-                <p style="color:${mascotaC}"><i class="${mascotaI}"></i>${mascotaT}</p>
-            </div>
-        </div>
-`;
     }
   }
+  valor.innerHTML = html
 };
 
 /* Funcion para hacer card de inmuebles en ventas */
@@ -298,10 +283,10 @@ if (pathname === "/index.html") {
   windows = true;
   template_venta(windows);
   windows = true;
-  template_alquiler(windows);
+  template_alquiler(windows,Alq_index);
 } else if (pathname === "/propiedades_alquiler.html") {
   /* Hacer cards de inmuebles en propiedades_alquiler.html */
-  template_alquiler(windows);
+  template_alquiler(windows,Alq_completo);
 } else if (pathname === "/propiedades_venta.html") {
     /* Hacer cards de inmuebles en propiedades_venta.html */
   template_venta(windows);
