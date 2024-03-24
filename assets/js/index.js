@@ -4,12 +4,10 @@ const Alq_completo = document.querySelector("#Alquilerdisponible");
 const Ven_completo = document.querySelector("#Ventadisponible");
 const Alq_index = document.querySelector("#propiedades_alquiler");
 const Ven_index = document.querySelector("#propiedades_venta");
-let n = 0;
-let windows = false;
+let n = 0; /* variable para contar por cual ciclo se va */
+let windows = false; /* Varible para determinar que pagina es / true = index.html  */
 let html = "";
-
 const pathname = window.location.pathname;
-
 const propiedades_alquiler = [
   {
     nombre: "MonoAmbiente",
@@ -78,7 +76,6 @@ const propiedades_alquiler = [
     pets: false,
   },
 ];
-
 const propiedades_venta = [
   {
     nombre: "MonoAmbiente",
@@ -147,35 +144,38 @@ const propiedades_venta = [
     pets: true,
   },
 ];
+
+/* Funcion para verificar si es permitido fumar */
+let verificarSmoke = function (modo) {
+  let variable = "";
+  if (modo.smoke == false) {
+    variable =
+      '<p style="color:red"><i class="fa-solid fa-smoking-ban"></i>No se permite fumar</p>';
+  } else {
+    variable =
+      '<p style="color:green"><i class="fas fa-smoking"></i>Permitido fumar</p>';
+  }
+  return variable;
+};
+
+/* Funcion para verificar si es permitido tener mascota */
+let verificarPet = function (modo) {
+  let variable = "";
+  if (modo.pets == false) {
+    variable =
+      '<p style="color:red"><i class="fa-solid fa-ban"></i>No se permiten mascotas</p>';
+  } else {
+    variable =
+      '<p style="color:green"><i class="fa-solid fa-paw"></i>Mascotas permitidas</p>';
+  }
+  return variable;
+};
+
 /* Funcion para hacer card de inmuebles en alquiler */
 let template_alquiler = function (ventana, valor) {
   for (let alquiler of propiedades_alquiler) {
-    let mascotaC = ""; /* color para condiciones de mascota */
-    let mascotaT = ""; /* texto para condiciones de mascota */
-    let mascotaI = ""; /* Icono para condiciones de mascota */
-    let fumarC = ""; /* color para condiciones de fumador (smoke) */
-    let fumarT = ""; /* texto para condiciones de fumador (smoke) */
-    let fumarI = ""; /* icono para condiciones de fumador (smoke) */
-
-    if (alquiler.smoke == false) {
-      fumarC = "red";
-      fumarT = "No se permite fumar";
-      fumarI = "fas fa-smoking-ban";
-    } else {
-      fumarC = "green";
-      fumarT = "Permitido fumar";
-      fumarI = "fas fa-smoking";
-    }
-
-    if (alquiler.pets == false) {
-      mascotaC = "red";
-      mascotaT = "No se permiten mascotas";
-      mascotaI = "fa-solid fa-ban";
-    } else {
-      mascotaC = "green";
-      mascotaT = "Mascotas permitidas";
-      mascotaI = "fa-solid fa-paw";
-    }
+    let pets = verificarPet(alquiler);
+    let smoke = verificarSmoke(alquiler);
 
     n += 1;
     console.log(n);
@@ -194,6 +194,7 @@ let template_alquiler = function (ventana, valor) {
                 </div>
             </div>
     `;
+    /* Condicion para que solo se creen 3 tarjetas */
     if (windows === true) {
       if (n === 3) {
         /* Solo permite crear 3 cards */
@@ -210,9 +211,8 @@ let template_alquiler = function (ventana, valor) {
 /* Funcion para hacer card de inmuebles en ventas */
 let template_venta = function (ventana, valor) {
   for (let venta of propiedades_venta) {
-    let pets = verificarPet (venta)
-    let smoke = verificarSmoke(venta)
-
+    let pets = verificarPet(venta);
+    let smoke = verificarSmoke(venta);
     n += 1;
     console.log(n);
     html += `
@@ -229,6 +229,8 @@ let template_venta = function (ventana, valor) {
               </div>
           </div>
     `;
+
+    /* Condicion para que solo se creen 3 tarjetas */
     if (windows === true) {
       if (n === 3) {
         /* Solo permite crear 3 cards */
@@ -242,26 +244,7 @@ let template_venta = function (ventana, valor) {
   html = "";
 };
 
-let verificarSmoke = function (modo){
-  let variable = ""
-  if (modo.smoke == false) {
-    variable = '<p style="color:red"><i class="fa-solid fa-smoking-ban"></i>No se permite fumar</p>'
-  } else {
-    variable = '<p style="color:green"><i class="fas fa-smoking"></i>Permitido fumar</p>'
-  }
-  return variable
-}
-
-let verificarPet = function (modo){
-  let variable = ""
-  if (modo.pets == false) {
-    variable = '<p style="color:red"><i class="fa-solid fa-ban"></i>No se permiten mascotas</p>'
-  } else {
-    variable = '<p style="color:green"><i class="fa-solid fa-paw"></i>Mascotas permitidas</p>'
-  }
-  return variable
-}
-
+/* Condicion para definir que pagina es*/
 if (pathname === "/index.html") {
   /* Hacer cards de inmuebles en index.html */
   windows = true;
