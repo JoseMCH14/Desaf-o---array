@@ -171,6 +171,7 @@ let verificarPet = function (modo) {
   return variable;
 };
 
+/* Funcion para crear template */
 let crearTemplate = function (varpets,varsmoke,varmodo){
 
   let local = "";
@@ -196,22 +197,11 @@ let template_alquiler = function (ventana, valor) {
   for (let alquiler of propiedades_alquiler) {
 
     let pets = verificarPet(alquiler);
-
-    console.log (pets , "etiqueta pets")
     let smoke = verificarSmoke(alquiler);
-
-    console.log (smoke , "etiqueta smoke")
-
     n += 1;
-    console.log(n);
-    console.log(windows, "windows alquiler");
-
     html += crearTemplate (pets,smoke,alquiler)
-    
-    /* Condicion para que solo se creen 3 tarjetas */
-    if (windows === true) {
-      if (n === 3) {
-        /* Solo permite crear 3 cards */
+    if (windows === true) { /* Condicion para que solo se creen 3 tarjetas */
+      if (n === 3) { 
         n = 0;
         break;
       }
@@ -229,25 +219,9 @@ let template_venta = function (ventana, valor) {
     let smoke = verificarSmoke(venta);
     n += 1;
     console.log(n);
-    html += `
-    <div class="card">
-              <img src="${venta.src}" alt=propieda">
-              <div class="cardtext">
-                  <h3 class="nombre">${venta.nombre}</h3>
-                  <h4 class="descripcion">${venta.descripcion}</h4>
-                  <p class="direccion"><i class="fas fa-map-marker-alt"></i>${venta.ubicacion}</p>  
-                  <p class="Habitaciones"><i class="fas fa-bed"></i>${venta.habitaciones} Habitaciones | <i class="fas fa-bath"></i>${venta.baño} Baños</p>
-                  <p><i class="fas fa-dollar-sign"></i>${venta.costo}</p>
-                  ${smoke}
-                  ${pets}
-              </div>
-          </div>
-    `;
-
-    /* Condicion para que solo se creen 3 tarjetas */
-    if (windows === true) {
+    html += crearTemplate (pets,smoke,venta)
+    if (windows === true) {    /* Condicion para que solo se creen 3 tarjetas */
       if (n === 3) {
-        /* Solo permite crear 3 cards */
         n = 0;
         break;
       }
