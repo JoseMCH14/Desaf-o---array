@@ -6,7 +6,7 @@ const Alq_index = document.querySelector("#propiedades_alquiler");
 const Ven_index = document.querySelector("#propiedades_venta");
 let n = 0;
 let windows = false;
-let html = ""
+let html = "";
 
 const pathname = window.location.pathname;
 
@@ -99,7 +99,7 @@ const propiedades_venta = [
     habitaciones: 1,
     baño: 2,
     costo: 350000,
-    smoke: true,
+    smoke: false,
     pets: false,
   },
   {
@@ -148,7 +148,7 @@ const propiedades_venta = [
   },
 ];
 /* Funcion para hacer card de inmuebles en alquiler */
-let template_alquiler = function (ventana,valor) {
+let template_alquiler = function (ventana, valor) {
   for (let alquiler of propiedades_alquiler) {
     let mascotaC = ""; /* color para condiciones de mascota */
     let mascotaT = ""; /* texto para condiciones de mascota */
@@ -179,7 +179,7 @@ let template_alquiler = function (ventana,valor) {
 
     n += 1;
     console.log(n);
-    console.log(windows , "windows alquiler");
+    console.log(windows, "windows alquiler");
     html += `
     <div class="card">
                 <img src="${alquiler.src}" alt=propieda">
@@ -194,7 +194,7 @@ let template_alquiler = function (ventana,valor) {
                 </div>
             </div>
     `;
-    if (windows === true) {  
+    if (windows === true) {
       if (n === 3) {
         /* Solo permite crear 3 cards */
         n = 0;
@@ -202,40 +202,16 @@ let template_alquiler = function (ventana,valor) {
       }
     }
   }
-  valor.innerHTML = html
-
+  valor.innerHTML = html;
+  /* Limpiando variable */
   html = "";
 };
 
 /* Funcion para hacer card de inmuebles en ventas */
-let template_venta = function (ventana,valor) {
+let template_venta = function (ventana, valor) {
   for (let venta of propiedades_venta) {
-    let mascotaC = ""; /* color para condiciones de mascota */
-    let mascotaT = ""; /* texto para condiciones de mascota */
-    let mascotaI = ""; /* icono para condiciones de mascota */
-    let fumarC = ""; /* color para condiciones de fumador (smoke) */
-    let fumarT = ""; /* icono para condiciones de fumador (smoke) */
-    let fumarI = ""; /* texto para condiciones de fumador (smoke) */
-
-    if (venta.smoke == false) {
-      fumarC = "red";
-      fumarT = "No se permite fumar";
-      fumarI = "fas fa-smoking-ban";
-    } else {
-      fumarC = "green";
-      fumarT = "Permitido fumar";
-      fumarI = "fas fa-smoking";
-    }
-
-    if (venta.pets == false) {
-      mascotaC = "red";
-      mascotaT = "No se permiten mascotas";
-      mascotaI = "fa-solid fa-ban";
-    } else {
-      mascotaC = "green";
-      mascotaT = "Mascotas permitidas";
-      mascotaI = "fa-solid fa-paw";
-    }
+    let pets = verificarPet (venta)
+    let smoke = verificarSmoke(venta)
 
     n += 1;
     console.log(n);
@@ -248,8 +224,8 @@ let template_venta = function (ventana,valor) {
                   <p class="direccion"><i class="fas fa-map-marker-alt"></i>${venta.ubicacion}</p>  
                   <p class="Habitaciones"><i class="fas fa-bed"></i>${venta.habitaciones} Habitaciones | <i class="fas fa-bath"></i>${venta.baño} Baños</p>
                   <p><i class="fas fa-dollar-sign"></i>${venta.costo}</p>
-                  <p style="color:${fumarC}"><i class="${fumarI}"></i>${fumarT}</p>
-                  <p style="color:${mascotaC}"><i class="${mascotaI}"></i>${mascotaT}</p>
+                  ${smoke}
+                  ${pets}
               </div>
           </div>
     `;
@@ -261,21 +237,41 @@ let template_venta = function (ventana,valor) {
       }
     }
   }
-  valor.innerHTML = html
-
+  valor.innerHTML = html;
+  /* Limpiando variable */
   html = "";
 };
+
+let verificarSmoke = function (modo){
+  let variable = ""
+  if (modo.smoke == false) {
+    variable = '<p style="color:red"><i class="fa-solid fa-smoking-ban"></i>No se permite fumar</p>'
+  } else {
+    variable = '<p style="color:green"><i class="fas fa-smoking"></i>Permitido fumar</p>'
+  }
+  return variable
+}
+
+let verificarPet = function (modo){
+  let variable = ""
+  if (modo.pets == false) {
+    variable = '<p style="color:red"><i class="fa-solid fa-ban"></i>No se permiten mascotas</p>'
+  } else {
+    variable = '<p style="color:green"><i class="fa-solid fa-paw"></i>Mascotas permitidas</p>'
+  }
+  return variable
+}
 
 if (pathname === "/index.html") {
   /* Hacer cards de inmuebles en index.html */
   windows = true;
-  template_venta(windows,Ven_index);
+  template_venta(windows, Ven_index);
   windows = true;
-  template_alquiler(windows,Alq_index);
+  template_alquiler(windows, Alq_index);
 } else if (pathname === "/propiedades_alquiler.html") {
   /* Hacer cards de inmuebles en propiedades_alquiler.html */
-  template_alquiler(windows,Alq_completo);
+  template_alquiler(windows, Alq_completo);
 } else if (pathname === "/propiedades_venta.html") {
-    /* Hacer cards de inmuebles en propiedades_venta.html */
-  template_venta(windows,Ven_completo);
+  /* Hacer cards de inmuebles en propiedades_venta.html */
+  template_venta(windows, Ven_completo);
 }
