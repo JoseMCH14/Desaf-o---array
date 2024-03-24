@@ -1,0 +1,130 @@
+*{
+    margin:0;
+    padding: 0;
+    border: 0;
+    font-family: "Raleway", sans-serif;
+}
+
+.navbar{
+    background-color:#D0D3D4;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.navbar ul {
+    display: flex;
+    flex-direction: row;
+    justify-content:start;
+    align-items: center;
+    list-style-type:none;
+    margin-left: 50px;
+    cursor: pointer;
+    
+}
+
+.navbar ul li{
+    margin-right: 10px;
+}
+
+.navbar ul li a{
+    text-decoration: none
+}
+
+.navbar ul li a:visited{
+    color:black
+}
+
+.banner{
+    background-image: url('../img/img-main.jpeg');
+    background-size: cover; /* La imagen cubrirá todo el ancho y largo */
+    background-position: center;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+}
+
+button{
+    background-color: black;
+    color: white;
+    padding: 5px 5px;
+    border: none;
+    border-radius: 5%;
+    cursor: pointer;
+    font-size:10px;
+ 
+}
+
+h2{
+    font-size:15px;
+}
+
+.alquiler{
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+
+.venta{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0 20px 50px;
+}
+
+#Alquilerdisponible{
+    margin: 20px 50px;
+    display: flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+    justify-content: center;
+}
+
+#Ventadisponible{
+    margin: 20px 50px;
+    display: flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 50px 20px 0;
+    border: solid 1px #D0D3D4;
+    border-radius: 5px;
+}
+.card img{
+    height: 250px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.cardtext{
+    margin-left: 10px;
+}
+
+.cardtext h3{
+    text-align:center;
+    margin: 5px 0;
+    font-size: 20px;
+}
+
+.cardtext h4{
+    text-align:center;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.cardtext p {
+    margin: 5px 0;
+    font-size: 13px;
+}
+
+.cardtext i {
+    margin-right: 5px;
+}
+
