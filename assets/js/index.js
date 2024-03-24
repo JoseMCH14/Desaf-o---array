@@ -172,8 +172,7 @@ let verificarPet = function (modo) {
 };
 
 /* Funcion para crear template */
-let crearTemplate = function (varpets,varsmoke,varmodo){
-
+let crearTemplate = function (varpets, varsmoke, varmodo) {
   let local = "";
   local = `
   <div class="card">
@@ -188,23 +187,21 @@ let crearTemplate = function (varpets,varsmoke,varmodo){
                   ${varpets}
               </div>
           </div>
-  `
+  `;
   return local;
-}
+};
 
 /* Funcion para hacer card de inmuebles en alquiler */
 let template_alquiler = function (ventana, valor) {
   for (let alquiler of propiedades_alquiler) {
-
     let pets = verificarPet(alquiler);
     let smoke = verificarSmoke(alquiler);
     n += 1;
-    html += crearTemplate (pets,smoke,alquiler)
-    if (windows === true) { /* Condicion para que solo se creen 3 tarjetas */
-      if (n === 3) { 
-        n = 0;
-        break;
-      }
+    html += crearTemplate(pets, smoke, alquiler);
+    if (windows === true && n === 3) {
+      /* Condicion para que solo se creen 3 tarjetas */
+      n = 0;
+      break;
     }
   }
   valor.innerHTML = html;
@@ -219,12 +216,11 @@ let template_venta = function (ventana, valor) {
     let smoke = verificarSmoke(venta);
     n += 1;
     console.log(n);
-    html += crearTemplate (pets,smoke,venta)
-    if (windows === true) {    /* Condicion para que solo se creen 3 tarjetas */
-      if (n === 3) {
-        n = 0;
-        break;
-      }
+    html += crearTemplate(pets, smoke, venta);
+    if (windows === true && n === 3) {
+      /* Condicion para que solo se creen 3 tarjetas */
+      n = 0;
+      break;
     }
   }
   valor.innerHTML = html;
