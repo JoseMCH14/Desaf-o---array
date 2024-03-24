@@ -146,15 +146,15 @@ const propiedades_venta = [
     pets: true,
   },
 ];
-
+/* Funcion para hacer template de alquiler */
 let template_alquiler = function (ventana) {
   for (let alquiler of propiedades_alquiler) {
-    let mascotaC = "";
-    let mascotaT = "";
-    let mascotaI = "";
-    let fumarC = "";
-    let fumarT = "";
-    let fumarI = "";
+    let mascotaC = ""; /* color para condiciones de mascota */
+    let mascotaT = "";/* texto para condiciones de mascota */
+    let mascotaI = ""; /* Icono para condiciones de mascota */
+    let fumarC = ""; /* color para condiciones de fumador (smoke) */
+    let fumarT = ""; /* texto para condiciones de fumador (smoke) */
+    let fumarI = ""; /* icono para condiciones de fumador (smoke) */
 
     if (alquiler.smoke == false) {
       fumarC = "red";
@@ -217,14 +217,15 @@ let template_alquiler = function (ventana) {
   }
 };
 
+/* Funcion para hacer template de ventas */
 let template_venta = function (ventana) {
   for (let venta of propiedades_venta) {
-    let mascotaC = "";
-    let mascotaT = "";
-    let mascotaI = "";
-    let fumarC = "";
-    let fumarT = "";
-    let fumarI = "";
+    let mascotaC = "";/* color para condiciones de mascota */
+    let mascotaT = "";/* texto para condiciones de mascota */
+    let mascotaI = "";/* icono para condiciones de mascota */
+    let fumarC = "";/* color para condiciones de fumador (smoke) */
+    let fumarT = "";/* icono para condiciones de fumador (smoke) */
+    let fumarI = "";/* texto para condiciones de fumador (smoke) */
 
     if (venta.smoke == false) {
       fumarC = "red";
