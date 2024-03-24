@@ -17,13 +17,12 @@
     justify-content:start;
     align-items: center;
     list-style-type:none;
-    margin-left: 50px;
-    cursor: pointer;
-    
+    margin-left: 50px;    
 }
 
 .navbar ul li{
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .navbar ul li a{
@@ -32,6 +31,11 @@
 
 .navbar ul li a:visited{
     color:black
+}
+
+.navbar ul li a:hover{
+    color:black;
+    font-weight: bolder;
 }
 
 .banner{

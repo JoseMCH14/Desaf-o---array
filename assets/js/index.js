@@ -146,11 +146,11 @@ const propiedades_venta = [
     pets: true,
   },
 ];
-/* Funcion para hacer template de alquiler */
+/* Funcion para hacer card de inmuebles en alquiler */
 let template_alquiler = function (ventana) {
   for (let alquiler of propiedades_alquiler) {
     let mascotaC = ""; /* color para condiciones de mascota */
-    let mascotaT = "";/* texto para condiciones de mascota */
+    let mascotaT = ""; /* texto para condiciones de mascota */
     let mascotaI = ""; /* Icono para condiciones de mascota */
     let fumarC = ""; /* color para condiciones de fumador (smoke) */
     let fumarT = ""; /* texto para condiciones de fumador (smoke) */
@@ -180,6 +180,7 @@ let template_alquiler = function (ventana) {
     console.log(n);
     console.log(windows);
     if (windows === true) {
+      /* Hacer cards de inmuebles en index.html */
       Alq_index.innerHTML += `
       <div class="card">
                   <img src="${alquiler.src}" alt=propieda">
@@ -195,12 +196,14 @@ let template_alquiler = function (ventana) {
               </div>
       `;
       if (n === 3) {
+        /* Solo permite crear 3 cards */
         n = 0;
         break;
       }
     } else {
+      /* Hacer cards de inmuebles en propiedades_alquiler.html */
       Alq_completo.innerHTML += `
-<div class="card">
+        <div class="card">
             <img src="${alquiler.src}" alt=propieda">
             <div class="cardtext">
                 <h3 class="nombre">${alquiler.nombre}</h3>
@@ -217,15 +220,15 @@ let template_alquiler = function (ventana) {
   }
 };
 
-/* Funcion para hacer template de ventas */
+/* Funcion para hacer card de inmuebles en ventas */
 let template_venta = function (ventana) {
   for (let venta of propiedades_venta) {
-    let mascotaC = "";/* color para condiciones de mascota */
-    let mascotaT = "";/* texto para condiciones de mascota */
-    let mascotaI = "";/* icono para condiciones de mascota */
-    let fumarC = "";/* color para condiciones de fumador (smoke) */
-    let fumarT = "";/* icono para condiciones de fumador (smoke) */
-    let fumarI = "";/* texto para condiciones de fumador (smoke) */
+    let mascotaC = ""; /* color para condiciones de mascota */
+    let mascotaT = ""; /* texto para condiciones de mascota */
+    let mascotaI = ""; /* icono para condiciones de mascota */
+    let fumarC = ""; /* color para condiciones de fumador (smoke) */
+    let fumarT = ""; /* icono para condiciones de fumador (smoke) */
+    let fumarI = ""; /* texto para condiciones de fumador (smoke) */
 
     if (venta.smoke == false) {
       fumarC = "red";
@@ -250,6 +253,7 @@ let template_venta = function (ventana) {
     n += 1;
     console.log(n);
     if (windows === true) {
+      /* Hacer cards de inmuebles en index.html */
       Ven_index.innerHTML += `
     <div class="card">
               <img src="${venta.src}" alt=propieda">
@@ -265,10 +269,12 @@ let template_venta = function (ventana) {
           </div>
     `;
       if (n === 3) {
+        /* Solo permite crear 3 cards */
         n = 0;
         break;
       }
     } else {
+      /* Hacer cards de inmuebles en propiedades_venta.html */
       Ven_completo.innerHTML += `
     <div class="card">
               <img src="${venta.src}" alt=propieda">
@@ -288,12 +294,15 @@ let template_venta = function (ventana) {
 };
 
 if (pathname === "/index.html") {
+  /* Hacer cards de inmuebles en index.html */
   windows = true;
   template_venta(windows);
   windows = true;
   template_alquiler(windows);
 } else if (pathname === "/propiedades_alquiler.html") {
+  /* Hacer cards de inmuebles en propiedades_alquiler.html */
   template_alquiler(windows);
 } else if (pathname === "/propiedades_venta.html") {
+    /* Hacer cards de inmuebles en propiedades_venta.html */
   template_venta(windows);
 }
