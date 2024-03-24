@@ -179,7 +179,7 @@ let template_alquiler = function (ventana,valor) {
 
     n += 1;
     console.log(n);
-    console.log(windows);
+    console.log(windows , "windows alquiler");
     html += `
     <div class="card">
                 <img src="${alquiler.src}" alt=propieda">
@@ -203,10 +203,12 @@ let template_alquiler = function (ventana,valor) {
     }
   }
   valor.innerHTML = html
+
+  html = "";
 };
 
 /* Funcion para hacer card de inmuebles en ventas */
-let template_venta = function (ventana) {
+let template_venta = function (ventana,valor) {
   for (let venta of propiedades_venta) {
     let mascotaC = ""; /* color para condiciones de mascota */
     let mascotaT = ""; /* texto para condiciones de mascota */
@@ -237,9 +239,7 @@ let template_venta = function (ventana) {
 
     n += 1;
     console.log(n);
-    if (windows === true) {
-      /* Hacer cards de inmuebles en index.html */
-      Ven_index.innerHTML += `
+    html += `
     <div class="card">
               <img src="${venta.src}" alt=propieda">
               <div class="cardtext">
@@ -253,35 +253,23 @@ let template_venta = function (ventana) {
               </div>
           </div>
     `;
+    if (windows === true) {
       if (n === 3) {
         /* Solo permite crear 3 cards */
         n = 0;
         break;
       }
-    } else {
-      /* Hacer cards de inmuebles en propiedades_venta.html */
-      Ven_completo.innerHTML += `
-    <div class="card">
-              <img src="${venta.src}" alt=propieda">
-              <div class="cardtext">
-                  <h3 class="nombre">${venta.nombre}</h3>
-                  <h4 class="descripcion">${venta.descripcion}</h4>
-                  <p class="direccion"><i class="fas fa-map-marker-alt"></i>${venta.ubicacion}</p>  
-                  <p class="Habitaciones"><i class="fas fa-bed"></i>${venta.habitaciones} Habitaciones | <i class="fas fa-bath"></i>${venta.baño} Baños</p>
-                  <p><i class="fas fa-dollar-sign"></i>${venta.costo}</p>
-                  <p style="color:${fumarC}"><i class="${fumarI}"></i>${fumarT}</p>
-                  <p style="color:${mascotaC}"><i class="${mascotaI}"></i>${mascotaT}</p>
-              </div>
-          </div>
-    `;
     }
   }
+  valor.innerHTML = html
+
+  html = "";
 };
 
 if (pathname === "/index.html") {
   /* Hacer cards de inmuebles en index.html */
   windows = true;
-  template_venta(windows);
+  template_venta(windows,Ven_index);
   windows = true;
   template_alquiler(windows,Alq_index);
 } else if (pathname === "/propiedades_alquiler.html") {
@@ -289,5 +277,5 @@ if (pathname === "/index.html") {
   template_alquiler(windows,Alq_completo);
 } else if (pathname === "/propiedades_venta.html") {
     /* Hacer cards de inmuebles en propiedades_venta.html */
-  template_venta(windows);
+  template_venta(windows,Ven_completo);
 }
