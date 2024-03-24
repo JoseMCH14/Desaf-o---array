@@ -171,6 +171,26 @@ let verificarPet = function (modo) {
   return variable;
 };
 
+let crearTemplate = function (varpets,varsmoke,varmodo){
+
+  let local = "";
+  local = `
+  <div class="card">
+              <img src="${varmodo.src}" alt=propieda">
+              <div class="cardtext">
+                  <h3 class="nombre">${varmodo.nombre}</h3>
+                  <h4 class="descripcion">${varmodo.descripcion}</h4>
+                  <p class="direccion"><i class="fas fa-map-marker-alt"></i>${varmodo.ubicacion}</p>  
+                  <p class="Habitaciones"><i class="fas fa-bed"></i>${varmodo.habitaciones} Habitaciones | <i class="fas fa-bath"></i>${varmodo.baño} Baños</p>
+                  <p><i class="fas fa-dollar-sign"></i>${varmodo.costo}</p>
+                  ${varsmoke}
+                  ${varpets}
+              </div>
+          </div>
+  `
+  return local;
+}
+
 /* Funcion para hacer card de inmuebles en alquiler */
 let template_alquiler = function (ventana, valor) {
   for (let alquiler of propiedades_alquiler) {
@@ -185,20 +205,9 @@ let template_alquiler = function (ventana, valor) {
     n += 1;
     console.log(n);
     console.log(windows, "windows alquiler");
-    html += `
-    <div class="card">
-                <img src="${alquiler.src}" alt=propieda">
-                <div class="cardtext">
-                    <h3 class="nombre">${alquiler.nombre}</h3>
-                    <h4 class="descripcion">${alquiler.descripcion}</h4>
-                    <p class="direccion"><i class="fas fa-map-marker-alt"></i>${alquiler.ubicacion}</p>  
-                    <p class="Habitaciones"><i class="fas fa-bed"></i>${alquiler.habitaciones} Habitaciones | <i class="fas fa-bath"></i>${alquiler.baño} Baños</p>
-                    <p><i class="fas fa-dollar-sign"></i>${alquiler.costo}</p>
-                    ${smoke}
-                    ${pets}
-                </div>
-            </div>
-    `;
+
+    html += crearTemplate (pets,smoke,alquiler)
+    
     /* Condicion para que solo se creen 3 tarjetas */
     if (windows === true) {
       if (n === 3) {
