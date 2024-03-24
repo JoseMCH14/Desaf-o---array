@@ -2,6 +2,10 @@ console.log("Entre al archivo index.js", "inicializacion");
 
 const Alq_completo = document.querySelector("#Alquilerdisponible");
 const Ven_completo = document.querySelector("#Ventadisponible");
+const Alq_index = document.querySelector("#propiedades_alquiler");
+const Ven_index = document.querySelector("#propiedades_venta");
+let n = 0;
+let windows = false;
 
 const pathname = window.location.pathname;
 
@@ -143,37 +147,59 @@ const propiedades_venta = [
   },
 ];
 
-let alq = function(){
-for (let alquiler of propiedades_alquiler) {
-    let mascotaC = '';
-    let mascotaT = '';
-    let mascotaI = '';
-    let fumarC = '';
-    let fumarT = '';
-    let fumarI= '';
+let alq = function (ventana) {
+  for (let alquiler of propiedades_alquiler) {
+    let mascotaC = "";
+    let mascotaT = "";
+    let mascotaI = "";
+    let fumarC = "";
+    let fumarT = "";
+    let fumarI = "";
 
-    if (alquiler.smoke == false){
-        fumarC = "red"
-        fumarT="No se permite fumar"
-        fumarI="fas fa-smoking-ban"
-    }
-    else{
-        fumarC = "green"
-        fumarT='Permitido fumar'
-        fumarI="fas fa-smoking"
+    if (alquiler.smoke == false) {
+      fumarC = "red";
+      fumarT = "No se permite fumar";
+      fumarI = "fas fa-smoking-ban";
+    } else {
+      fumarC = "green";
+      fumarT = "Permitido fumar";
+      fumarI = "fas fa-smoking";
     }
 
-    if (alquiler.pets == false){
-        mascotaC = "red"
-        mascotaT = "No se permiten mascotas"
-        mascotaI = "fa-solid fa-ban"
+    if (alquiler.pets == false) {
+      mascotaC = "red";
+      mascotaT = "No se permiten mascotas";
+      mascotaI = "fa-solid fa-ban";
+    } else {
+      mascotaC = "green";
+      mascotaT = "Mascotas permitidas";
+      mascotaI = "fa-solid fa-paw";
     }
-    else{
-        mascotaC = "green"
-        mascotaT = "Mascotas permitidas"
-        mascotaI = "fa-solid fa-paw"
-    }
-  Alq_completo.innerHTML += `
+
+    n += 1;
+    console.log(n);
+    console.log(windows);
+    if (windows === true) {
+      Alq_index.innerHTML += `
+      <div class="card">
+                  <img src="${alquiler.src}" alt=propieda">
+                  <div class="cardtext">
+                      <h3 class="nombre">${alquiler.nombre}</h3>
+                      <h4 class="descripcion">${alquiler.descripcion}</h4>
+                      <p class="direccion"><i class="fas fa-map-marker-alt"></i>${alquiler.ubicacion}</p>  
+                      <p class="Habitaciones"><i class="fas fa-bed"></i>${alquiler.habitaciones} Habitaciones | <i class="fas fa-bath"></i>${alquiler.baño} Baños</p>
+                      <p><i class="fas fa-dollar-sign"></i>${alquiler.costo}</p>
+                      <p style="color:${fumarC}"><i class="${fumarI}"></i>${fumarT}</p>
+                      <p style="color:${mascotaC}"><i class="${mascotaI}"></i>${mascotaT}</p>
+                  </div>
+              </div>
+      `;
+      if (n === 3) {
+        n = 0;
+        break;
+      }
+    } else {
+      Alq_completo.innerHTML += `
 <div class="card">
             <img src="${alquiler.src}" alt=propieda">
             <div class="cardtext">
@@ -186,61 +212,87 @@ for (let alquiler of propiedades_alquiler) {
                 <p style="color:${mascotaC}"><i class="${mascotaI}"></i>${mascotaT}</p>
             </div>
         </div>
-`
-}
-}
+`;
+    }
+  }
+};
 
-let vent = function(){
-for (let venta of propiedades_venta) {
-  let mascotaC = '';
-  let mascotaT = '';
-  let mascotaI = '';
-  let fumarC = '';
-  let fumarT = '';
-  let fumarI= '';
+let vent = function (ventana) {
+  for (let venta of propiedades_venta) {
+    let mascotaC = "";
+    let mascotaT = "";
+    let mascotaI = "";
+    let fumarC = "";
+    let fumarT = "";
+    let fumarI = "";
 
-  if (venta.smoke == false){
-      fumarC = "red"
-      fumarT="No se permite fumar"
-      fumarI="fas fa-smoking-ban"
-  }
-  else{
-      fumarC = "green"
-      fumarT='Permitido fumar'
-      fumarI="fas fa-smoking"
-  }
+    if (venta.smoke == false) {
+      fumarC = "red";
+      fumarT = "No se permite fumar";
+      fumarI = "fas fa-smoking-ban";
+    } else {
+      fumarC = "green";
+      fumarT = "Permitido fumar";
+      fumarI = "fas fa-smoking";
+    }
 
-  if (venta.pets == false){
-      mascotaC = "red"
-      mascotaT = "No se permiten mascotas"
-      mascotaI = "fa-solid fa-ban"
-  }
-  else{
-      mascotaC = "green"
-      mascotaT = "Mascotas permitidas"
-      mascotaI = "fa-solid fa-paw"
-  }
-  Ven_completo.innerHTML += `
-<div class="card">
-          <img src="${venta.src}" alt=propieda">
-          <div class="cardtext">
-              <h3 class="nombre">${venta.nombre}</h3>
-              <h4 class="descripcion">${venta.descripcion}</h4>
-              <p class="direccion"><i class="fas fa-map-marker-alt"></i>${venta.ubicacion}</p>  
-              <p class="Habitaciones"><i class="fas fa-bed"></i>${venta.habitaciones} Habitaciones | <i class="fas fa-bath"></i>${venta.baño} Baños</p>
-              <p><i class="fas fa-dollar-sign"></i>${venta.costo}</p>
-              <p style="color:${fumarC}"><i class="${fumarI}"></i>${fumarT}</p>
-              <p style="color:${mascotaC}"><i class="${mascotaI}"></i>${mascotaT}</p>
+    if (venta.pets == false) {
+      mascotaC = "red";
+      mascotaT = "No se permiten mascotas";
+      mascotaI = "fa-solid fa-ban";
+    } else {
+      mascotaC = "green";
+      mascotaT = "Mascotas permitidas";
+      mascotaI = "fa-solid fa-paw";
+    }
+
+    n += 1;
+    console.log(n);
+    if (windows === true) {
+      Ven_index.innerHTML += `
+    <div class="card">
+              <img src="${venta.src}" alt=propieda">
+              <div class="cardtext">
+                  <h3 class="nombre">${venta.nombre}</h3>
+                  <h4 class="descripcion">${venta.descripcion}</h4>
+                  <p class="direccion"><i class="fas fa-map-marker-alt"></i>${venta.ubicacion}</p>  
+                  <p class="Habitaciones"><i class="fas fa-bed"></i>${venta.habitaciones} Habitaciones | <i class="fas fa-bath"></i>${venta.baño} Baños</p>
+                  <p><i class="fas fa-dollar-sign"></i>${venta.costo}</p>
+                  <p style="color:${fumarC}"><i class="${fumarI}"></i>${fumarT}</p>
+                  <p style="color:${mascotaC}"><i class="${mascotaI}"></i>${mascotaT}</p>
+              </div>
           </div>
-      </div>
-`
-}
-}
+    `;
+      if (n === 3) {
+        n = 0;
+        break;
+      }
+    } else {
+      Ven_completo.innerHTML += `
+    <div class="card">
+              <img src="${venta.src}" alt=propieda">
+              <div class="cardtext">
+                  <h3 class="nombre">${venta.nombre}</h3>
+                  <h4 class="descripcion">${venta.descripcion}</h4>
+                  <p class="direccion"><i class="fas fa-map-marker-alt"></i>${venta.ubicacion}</p>  
+                  <p class="Habitaciones"><i class="fas fa-bed"></i>${venta.habitaciones} Habitaciones | <i class="fas fa-bath"></i>${venta.baño} Baños</p>
+                  <p><i class="fas fa-dollar-sign"></i>${venta.costo}</p>
+                  <p style="color:${fumarC}"><i class="${fumarI}"></i>${fumarT}</p>
+                  <p style="color:${mascotaC}"><i class="${mascotaI}"></i>${mascotaT}</p>
+              </div>
+          </div>
+    `;
+    }
+  }
+};
 
-if (pathname === '/index.html'){
-
-}else if (pathname === '/propiedades_alquiler.html'){
-  alq();
-}else if (pathname === '/propiedades_venta.html'){
-  vent();
+if (pathname === "/index.html") {
+  windows = true;
+  vent(windows);
+  windows = true;
+  alq(windows);
+} else if (pathname === "/propiedades_alquiler.html") {
+  alq(windows);
+} else if (pathname === "/propiedades_venta.html") {
+  vent(windows);
 }

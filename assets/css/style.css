@@ -81,6 +81,22 @@ h2{
     justify-content: center;
 }
 
+#propiedades_alquiler{
+    margin: 20px 50px;
+    display: flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+    justify-content: center;
+}
+
+#propiedades_venta{
+    margin: 20px 50px;
+    display: flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+    justify-content: center;
+}
+
 #Ventadisponible{
     margin: 20px 50px;
     display: flex;
