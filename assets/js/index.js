@@ -174,8 +174,13 @@ let verificarPet = function (modo) {
 /* Funcion para hacer card de inmuebles en alquiler */
 let template_alquiler = function (ventana, valor) {
   for (let alquiler of propiedades_alquiler) {
+
     let pets = verificarPet(alquiler);
+
+    console.log (pets , "etiqueta pets")
     let smoke = verificarSmoke(alquiler);
+
+    console.log (smoke , "etiqueta smoke")
 
     n += 1;
     console.log(n);
@@ -189,8 +194,8 @@ let template_alquiler = function (ventana, valor) {
                     <p class="direccion"><i class="fas fa-map-marker-alt"></i>${alquiler.ubicacion}</p>  
                     <p class="Habitaciones"><i class="fas fa-bed"></i>${alquiler.habitaciones} Habitaciones | <i class="fas fa-bath"></i>${alquiler.baño} Baños</p>
                     <p><i class="fas fa-dollar-sign"></i>${alquiler.costo}</p>
-                    <p style="color:${fumarC}"><i class="${fumarI}"></i>${fumarT}</p>
-                    <p style="color:${mascotaC}"><i class="${mascotaI}"></i>${mascotaT}</p>
+                    ${smoke}
+                    ${pets}
                 </div>
             </div>
     `;
