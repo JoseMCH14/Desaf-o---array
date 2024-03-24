@@ -10,7 +10,7 @@ let html = "";
 const pathname = window.location.pathname;
 const propiedades_alquiler = [
   {
-    nombre: "MonoAmbiente",
+    nombre: "Departamento pequeño",
     src: "./assets/img/Alquiler 1.jpg",
     descripcion: "Depa. tipo estudio en barrio universitario",
     ubicacion: "Barrio Universitario , RM",
@@ -21,7 +21,7 @@ const propiedades_alquiler = [
     pets: false,
   },
   {
-    nombre: "Departamento nuevo equipado",
+    nombre: "Departamento amoblado",
     src: "./assets/img/Alquiler 2.jpg",
     descripcion: "Departamento antiguo ubicado en el casco central",
     ubicacion: "Santiago , RM",
